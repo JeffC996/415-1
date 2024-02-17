@@ -29,8 +29,13 @@ cars = ['toyota', 'honda', 'ford']
  * components:
  *   schemas:
  *     Car:
- *       type: string
- *       description: The name of the car
+ *       type: object
+ *       required:
+ *         - name
+ *       properties:
+ *         name:
+ *           type: string
+ *           description: The name of the car
  */
 
 /**
