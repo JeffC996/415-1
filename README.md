@@ -26,3 +26,7 @@ docker run -p 3000:3000 -d 415-1-main
 ### Prerequisites
 Docker Desktop
 
+## Changelog
+1. Mar 24: Added configmap/deploy/service.yaml for k8s.
+2. Mar 24: Added API fib: return a Fibonacci sequence based on an input.
+3. Mar 24: Added API config: get the environment variables.
