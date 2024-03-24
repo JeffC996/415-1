@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 3000
+const port = process.env.PORT
 const swaggerJsdoc = require('swagger-jsdoc')
 const swaggerUi = require('swagger-ui-express')
 
@@ -205,10 +205,70 @@ app.delete('/cars/:id', (req, res) => {
     res.status(200).send('car deleted')
 })
 
+/**
+ * @swagger
+ * /config:
+ *  get:
+ *    summary: Get the environment variables
+ *    tags: [Config]
+ *    responses:
+ *      200:
+ *       description: Returns the environment variables
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             additionalProperties:
+ *               type: string
+ */
+app.get('/config', (req, res) => {
+    var env_config = process.env;
+    console.log(env_config);
+    res.json(env_config);
+})
 
 
-
-
+/**
+ * @swagger
+ * /fib:
+ *   get:
+ *     summary: Get the Fibonacci sequence
+ *     tags:
+ *       - Fibonacci
+ *     parameters:
+ *       - in: query
+ *         name: length
+ *         required: true
+ *         description: The number of elements in the Fibonacci sequence to return
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Returns the Fibonacci sequence
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: integer
+ *       400:
+ *         description: Invalid input
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ */
+app.get('/fib', (req, res) => {
+    const length = parseInt(req.query.length, 10);
+    const fibSequence = [0, 1];
+    for (let i = 2; i < length; i++) {
+        fibSequence[i] = fibSequence[i - 1] + fibSequence[i - 2];
+    }
+    res.json(fibSequence.slice(0, length)); // 返回请求的斐波那契数列长度
+});
 // ----------------------------------------
 
 app.listen(port, () => {

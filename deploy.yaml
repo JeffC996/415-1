@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lab-api-deployment
+  labels:
+    app: lab-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: lab-api
+  template:
+    metadata:
+      labels:
+        app: lab-api
+    spec:
+      containers:
+      - name: lab-api
+        image: w8hw:1.0 # image for app.js
+        ports:
+        - containerPort: 3000
+        env:
+        - name: PORT
+          valueFrom:
+            configMapKeyRef:
+              name: my-microservice-config
+              key: PORT
+        - name: DATA_MICROSERVICE
+          valueFrom:
+            configMapKeyRef:
+              name: my-microservice-config
+              key: DATA_MICROSERVICE
