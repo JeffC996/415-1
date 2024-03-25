@@ -2,7 +2,7 @@
 This is a simple Express application providing REST APIs for a list of cars.
 Each Car object has only one property, a string "name".
 
-There are six methods in total: 
+There are six methods in total:  
 GET /           - Welcome messag  
 GET /cars       - Returns a list of cars  
 GET /cars/:id   - Get a car by its index  
