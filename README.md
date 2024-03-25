@@ -3,12 +3,12 @@ This is a simple Express application providing REST APIs for a list of cars.
 Each Car object has only one property, a string "name".
 
 There are six methods in total: 
-GET /           - Welcome message
-GET /cars       - Returns a list of cars
-GET /cars/:id   - Get a car by its index
-POST /cars      - Add a new car (name required in request body)
-PUT /cars/:id   - Update a car by its index (name required in request body)
-DELETE /cars/:id- Delete a car by its index
+GET /           - Welcome messag  
+GET /cars       - Returns a list of cars  
+GET /cars/:id   - Get a car by its index  
+POST /cars      - Add a new car (name required in request body)  
+PUT /cars/:id   - Update a car by its index (name required in request body)  
+DELETE /cars/:id- Delete a car by its index  
 
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
