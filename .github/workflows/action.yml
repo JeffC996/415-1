@@ -19,7 +19,7 @@ jobs:
     - name: Run Docker container
       run: docker run -p 3000:3000 -d 415-1-main
     - name: Wait for application to start
-      run: sleep 10
+      run: sleep 60
 
 
     - name: Test GET /fib
