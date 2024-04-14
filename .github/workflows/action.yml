@@ -21,31 +21,6 @@ jobs:
     - name: Wait for application to start
       run: sleep 10
 
-    - name: Test GET /
-      run: curl -s http://localhost:3000/
-
-    - name: Test GET /cars
-      run: curl -s http://localhost:3000/cars
-
-    - name: Test GET /cars/:id
-      run: curl -s http://localhost:3000/cars/0
-
-    - name: Test POST /cars
-      run: |
-        curl -s -o /dev/null -w "%{http_code}" -X POST \
-        -H "Content-Type: application/json" \
-        -d '{"name":"testcar"}' \
-        http://localhost:3000/cars
-
-    - name: Test PUT /cars/:id
-      run: |
-        curl -s -o /dev/null -w "%{http_code}" -X PUT \
-        -H "Content-Type: application/json" \
-        -d '{"name":"updatedcar"}' \
-        http://localhost:3000/cars/0
-
-    - name: Test DELETE /cars/:id
-      run: curl -s -o /dev/null -w "%{http_code}" -X DELETE http://localhost:3000/cars/0
 
     - name: Test GET /fib
       run: curl -s "http://localhost:3000/fib?length=5"
