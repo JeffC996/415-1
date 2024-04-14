@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main  
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest  
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+
+    - name: Build Docker image
+      run: docker build -t 415-1-main .
+    - name: Run Docker container
+      run: docker run -p 3000:3000 -d 415-1-main
+    - name: Wait for application to start
+      run: sleep 10
+
+    - name: Test GET /
+      run: curl -s http://localhost:3000/
+
+    - name: Test GET /cars
+      run: curl -s http://localhost:3000/cars
+
+    - name: Test GET /cars/:id
+      run: curl -s http://localhost:3000/cars/0
+
+    - name: Test POST /cars
+      run: |
+        curl -s -o /dev/null -w "%{http_code}" -X POST \
+        -H "Content-Type: application/json" \
+        -d '{"name":"testcar"}' \
+        http://localhost:3000/cars
+
+    - name: Test PUT /cars/:id
+      run: |
+        curl -s -o /dev/null -w "%{http_code}" -X PUT \
+        -H "Content-Type: application/json" \
+        -d '{"name":"updatedcar"}' \
+        http://localhost:3000/cars/0
+
+    - name: Test DELETE /cars/:id
+      run: curl -s -o /dev/null -w "%{http_code}" -X DELETE http://localhost:3000/cars/0
+
+    - name: Test GET /fib
+      run: curl -s "http://localhost:3000/fib?length=5"
